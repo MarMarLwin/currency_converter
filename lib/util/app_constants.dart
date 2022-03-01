@@ -9,6 +9,7 @@ import 'colors.dart';
 class AppConstants {
   static const String appName = 'Currency Converter';
   static const String apiKey = 'c3b8b3e0-9513-11ec-bfbf-39a4d1cfd571';
+  // I have some problemn to use currency layer free account.Athough I complaint this issues,it didn't fix yet.So I used this freecurrency api.
   static const String appBaseUrl = 'https://freecurrencyapi.net';
   static const String latestCurrencyRate = '/api/v2/latest?apikey=$apiKey';
   static const String databaseName = 'currency.db';
