@@ -1,6 +1,6 @@
 # currency
 
-This app will live currency rates
+This app will show live currency rates
 
 ## Getting Started
 

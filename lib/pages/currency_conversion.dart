@@ -256,96 +256,93 @@ class _CurrencyConversionState extends State<CurrencyConversion> {
   }
 
   Widget _showNumberInput() {
-    return Container(
-        margin:
-            EdgeInsets.only(left: Dimension.dimen10, right: Dimension.dimen10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Column(
-              children: List<Widget>.generate(3, (i) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (j) {
-                    String char =
-                        (7 - 3 * i + j).toString(); // (2-i)*3 + j+1 = 7-3*i+j
-                    return Container(
-                      margin: EdgeInsets.all(Dimension.dimen10),
-                      child: NumberInputWidget(
-                          text: char,
-                          buttonWidth: Dimension.iconSize100,
-                          buttonHeight: Dimension.dimen50,
-                          onPressed: () {
-                            setState(() {
-                              _fromAmountController.text =
-                                  _fromAmountController.text + char;
-                            });
-                          }),
-                    );
-                  }),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          children: List<Widget>.generate(3, (i) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(3, (j) {
+                String char =
+                    (7 - 3 * i + j).toString(); // (2-i)*3 + j+1 = 7-3*i+j
+                return Container(
+                  margin: EdgeInsets.all(Dimension.dimen10),
+                  child: NumberInputWidget(
+                      text: char,
+                      buttonWidth: Dimension.dimen90,
+                      buttonHeight: Dimension.dimen50,
+                      onPressed: () {
+                        setState(() {
+                          _fromAmountController.text =
+                              _fromAmountController.text + char;
+                        });
+                      }),
                 );
               }),
+            );
+          }),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              margin: EdgeInsets.all(Dimension.dimen10),
+              child: NumberInputWidget(
+                  text: '.',
+                  buttonWidth: Dimension.dimen90,
+                  buttonHeight: Dimension.dimen50,
+                  onPressed: () {
+                    setState(() {
+                      if (_fromAmountController.text.isNotEmpty &&
+                          !_fromAmountController.text.contains('.')) {
+                        _fromAmountController.text =
+                            _fromAmountController.text + '.';
+                      }
+                    });
+                  }),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.all(Dimension.dimen10),
-                  child: NumberInputWidget(
-                      text: '.',
-                      buttonWidth: Dimension.dimen90,
-                      buttonHeight: Dimension.dimen50,
-                      onPressed: () {
-                        setState(() {
-                          if (_fromAmountController.text.isNotEmpty &&
-                              !_fromAmountController.text.contains('.')) {
-                            _fromAmountController.text =
-                                _fromAmountController.text + '.';
-                          }
-                        });
-                      }),
-                ),
-                Container(
-                  margin: EdgeInsets.all(Dimension.dimen10),
-                  child: NumberInputWidget(
-                      text: '0',
-                      buttonWidth: Dimension.dimen90,
-                      buttonHeight: Dimension.dimen50,
-                      onPressed: () {
-                        setState(() {
-                          var currentText = _fromAmountController.text;
-                          if (currentText.isNotEmpty) {
-                            _fromAmountController.text =
-                                _fromAmountController.text + '0';
-                          }
-                        });
-                      }),
-                ),
-                Container(
-                  margin: EdgeInsets.all(Dimension.dimen10),
-                  child: NumberInputWidget(
-                    text: "←",
-                    buttonHeight: Dimension.dimen50,
-                    buttonWidth: Dimension.dimen90,
-                    iconColor: AppColor.primaryIconColor,
-                    onPressed: () {
-                      setState(() {
-                        int length = _fromAmountController.text.length;
-                        if (length > 0) {
-                          _fromAmountController.text = _fromAmountController
-                              .text
-                              .toString()
-                              .substring(0, length - 1);
-                        }
-                      });
-                    },
-                  ),
-                ),
-              ],
-            )
+            Container(
+              margin: EdgeInsets.all(Dimension.dimen10),
+              child: NumberInputWidget(
+                  text: '0',
+                  buttonWidth: Dimension.dimen90,
+                  buttonHeight: Dimension.dimen50,
+                  onPressed: () {
+                    setState(() {
+                      var currentText = _fromAmountController.text;
+                      if (currentText.isNotEmpty) {
+                        _fromAmountController.text =
+                            _fromAmountController.text + '0';
+                      }
+                    });
+                  }),
+            ),
+            Container(
+              margin: EdgeInsets.all(Dimension.dimen10),
+              child: NumberInputWidget(
+                text: "←",
+                buttonHeight: Dimension.dimen50,
+                buttonWidth: Dimension.dimen90,
+                iconColor: AppColor.primaryIconColor,
+                onPressed: () {
+                  setState(() {
+                    int length = _fromAmountController.text.length;
+                    if (length > 0) {
+                      _fromAmountController.text = _fromAmountController
+                          .text
+                          .toString()
+                          .substring(0, length - 1);
+                    }
+                  });
+                },
+              ),
+            ),
           ],
-        ));
+        )
+      ],
+    );
   }
 
   Widget _dropdownCurrency(List<CurrencyRate> currencyList, bool fromCurrency) {
