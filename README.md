@@ -1,6 +1,7 @@
 # currency
 
-This app will show live currency rates
+This app will show live currency rates.
+
 -I have some problemn to use currency layer free account.Athough I complaint this issues,it didn't fix yet.So I used this freecurrency api.
 
 ## Getting Started
