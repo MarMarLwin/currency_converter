@@ -47,211 +47,213 @@ class _CurrencyConversionState extends State<CurrencyConversion> {
           ),
         ),
         drawer: const MainDrawer(),
-        body: Column(
+        body: SingleChildScrollView(
+          child: Column(
 
-          children: [
-            Form(
-                key: _formKey,
-                child:
-                    GetBuilder<CurrencyController>(builder: (latestCurrency) {
-                  if (latestCurrency.currencyList.isNotEmpty) {
-                    fromCurrency = latestCurrency.currencyList.firstWhere(
-                        (element) => element.currency == _fromSelectedCurrency);
-                    toCurrency = latestCurrency.currencyList.firstWhere(
-                        (element) => element.currency == _toSelectedCurrency);
-                    return latestCurrency.isLoading
-                        ? const CircularProgressIndicator()
-                        : Container(
-                            color: AppColor.secondaryColor,
-                            padding: EdgeInsets.only(
-                                left: Dimension.dimen10,
-                                right: Dimension.dimen10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                //from currency
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: _dropdownCurrency(
-                                            latestCurrency.currencyList, true)
-                                        /*GestureDetector(
-                                        onTap: () async {
-                                          var result = await Get.to(() =>
-                                              CurrencyList(latestCurrency
-                                                  .currencyList));
-                                          setState(() {
-                                            _fromSelectedCurrency = result;
-                                          });
-                                        },
-                                        child: CurrencyDropdown(
-                                            _fromSelectedCurrency,
-                                            Dimension.fontSize16,
-                                            true),
-                                      ),*/
-                                        ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: TextFormField(
-                                        decoration: const InputDecoration(
-                                          hintText: '0',
-                                          hintStyle:
-                                              TextStyle(color: Colors.white),
-                                          border: InputBorder.none,
-                                          alignLabelWithHint: true,
-                                        ),
-                                        controller: _fromAmountController,
-                                        onChanged: (value) {
-                                          setState(() {
-                                            fromCurrency = latestCurrency
-                                                .currencyList
-                                                .firstWhere((element) =>
-                                                    element.currency ==
-                                                    _fromSelectedCurrency);
-                                          });
-                                        },
-                                        showCursor: false,
-                                        textAlign: TextAlign.end,
-                                        style: TextStyle(
-                                            fontSize: Dimension.fontSize24,
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w900),
-                                        onSaved: (value) {
-                                          fromCurrency = latestCurrency
-                                              .currencyList
-                                              .firstWhere((element) =>
-                                                  element.currency ==
-                                                  _fromSelectedCurrency);
-                                        },
-                                        keyboardType: TextInputType.none,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp(r'[0-9.]')),
-                                          LengthLimitingTextInputFormatter(15),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.white38,
-                                        height: Dimension.dimen20,
-                                        endIndent: Dimension.dimen10,
-                                        indent: Dimension.dimen10,
-                                      ),
-                                    ),
-                                    const Text(
-                                      '** ** ** **',
-                                      style:
-                                          AppConstants.kLabelDrawerTextStyle21,
-                                    ),
-                                    Expanded(
-                                      child: Divider(
-                                        color: Colors.white38,
-                                        height: Dimension.dimen20,
-                                        endIndent: Dimension.dimen10,
-                                        indent: Dimension.dimen10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                //to currency
-                                Visibility(
-                                  visible: isSingleConverter,
-                                  child: Row(
+            children: [
+              Form(
+                  key: _formKey,
+                  child:
+                      GetBuilder<CurrencyController>(builder: (latestCurrency) {
+                    if (latestCurrency.currencyList.isNotEmpty) {
+                      fromCurrency = latestCurrency.currencyList.firstWhere(
+                          (element) => element.currency == _fromSelectedCurrency);
+                      toCurrency = latestCurrency.currencyList.firstWhere(
+                          (element) => element.currency == _toSelectedCurrency);
+                      return latestCurrency.isLoading
+                          ? const CircularProgressIndicator()
+                          : Container(
+                              color: AppColor.secondaryColor,
+                              padding: EdgeInsets.only(
+                                  left: Dimension.dimen10,
+                                  right: Dimension.dimen10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  //from currency
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Expanded(
                                           flex: 1,
                                           child: _dropdownCurrency(
-                                              latestCurrency.currencyList,
-                                              false)),
+                                              latestCurrency.currencyList, true)
+                                          /*GestureDetector(
+                                          onTap: () async {
+                                            var result = await Get.to(() =>
+                                                CurrencyList(latestCurrency
+                                                    .currencyList));
+                                            setState(() {
+                                              _fromSelectedCurrency = result;
+                                            });
+                                          },
+                                          child: CurrencyDropdown(
+                                              _fromSelectedCurrency,
+                                              Dimension.fontSize16,
+                                              true),
+                                        ),*/
+                                          ),
                                       Expanded(
-                                          flex: 2,
-                                          child: CustomTextWidget(
-                                              double.parse(_fromAmountController
-                                                      .text.isEmpty
-                                                  ? "0"
-                                                  : _fromAmountController.text),
-                                              fromCurrency,
-                                              toCurrency)),
+                                        flex: 2,
+                                        child: TextFormField(
+                                          decoration: const InputDecoration(
+                                            hintText: '0',
+                                            hintStyle:
+                                                TextStyle(color: Colors.white),
+                                            border: InputBorder.none,
+                                            alignLabelWithHint: true,
+                                          ),
+                                          controller: _fromAmountController,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              fromCurrency = latestCurrency
+                                                  .currencyList
+                                                  .firstWhere((element) =>
+                                                      element.currency ==
+                                                      _fromSelectedCurrency);
+                                            });
+                                          },
+                                          showCursor: false,
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                              fontSize: Dimension.fontSize24,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w900),
+                                          onSaved: (value) {
+                                            fromCurrency = latestCurrency
+                                                .currencyList
+                                                .firstWhere((element) =>
+                                                    element.currency ==
+                                                    _fromSelectedCurrency);
+                                          },
+                                          keyboardType: TextInputType.none,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'[0-9.]')),
+                                            LengthLimitingTextInputFormatter(15),
+                                          ],
+                                        ),
+                                      ),
                                     ],
                                   ),
-                                ),
-                                Visibility(
-                                  visible: !isSingleConverter,
-                                  child: Container(
-                                    height: Dimension.dimen300,
-                                    child: Expanded(
-                                      child: ListView.separated(
-                                        /* physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        shrinkWrap: true,*/
-                                        itemCount:
-                                            latestCurrency.currencyList.length,
-                                        itemBuilder: (ctx, index) {
-                                          return Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                flex: 1,
-                                                child: CurrencyText(
-                                                    selectedText: latestCurrency
-                                                        .currencyList[index]
-                                                        .currency!,
-                                                    fontSize:
-                                                        Dimension.fontSize16),
-                                              ),
-                                              Expanded(
-                                                  flex: 2,
-                                                  child: CustomTextWidget(
-                                                      double.parse(
-                                                          _fromAmountController
-                                                                  .text.isEmpty
-                                                              ? "0"
-                                                              : _fromAmountController
-                                                                  .text),
-                                                      fromCurrency,
-                                                      latestCurrency
-                                                              .currencyList[
-                                                          index])),
-                                            ],
-                                          );
-                                        },
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return Divider(
-                                            color: Colors.white38,
-                                            height: Dimension.dimen10 / 4,
-                                            endIndent: Dimension.dimen10,
-                                            indent: Dimension.dimen10,
-                                          );
-                                        },
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors.white38,
+                                          height: Dimension.dimen20,
+                                          endIndent: Dimension.dimen10,
+                                          indent: Dimension.dimen10,
+                                        ),
                                       ),
+                                      const Text(
+                                        '** ** ** **',
+                                        style:
+                                            AppConstants.kLabelDrawerTextStyle21,
+                                      ),
+                                      Expanded(
+                                        child: Divider(
+                                          color: Colors.white38,
+                                          height: Dimension.dimen20,
+                                          endIndent: Dimension.dimen10,
+                                          indent: Dimension.dimen10,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  //to currency
+                                  Visibility(
+                                    visible: isSingleConverter,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                            flex: 1,
+                                            child: _dropdownCurrency(
+                                                latestCurrency.currencyList,
+                                                false)),
+                                        Expanded(
+                                            flex: 2,
+                                            child: CustomTextWidget(
+                                                double.parse(_fromAmountController
+                                                        .text.isEmpty
+                                                    ? "0"
+                                                    : _fromAmountController.text),
+                                                fromCurrency,
+                                                toCurrency)),
+                                      ],
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
-                          );
-                  } else {
-                    return const CircularProgressIndicator();
-                  }
-                })),
+                                  Visibility(
+                                    visible: !isSingleConverter,
+                                    child: Container(
+                                      height: Dimension.dimen300,
+                                      child: Expanded(
+                                        child: ListView.separated(
+                                          /* physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          shrinkWrap: true,*/
+                                          itemCount:
+                                              latestCurrency.currencyList.length,
+                                          itemBuilder: (ctx, index) {
+                                            return Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: CurrencyText(
+                                                      selectedText: latestCurrency
+                                                          .currencyList[index]
+                                                          .currency!,
+                                                      fontSize:
+                                                          Dimension.fontSize16),
+                                                ),
+                                                Expanded(
+                                                    flex: 2,
+                                                    child: CustomTextWidget(
+                                                        double.parse(
+                                                            _fromAmountController
+                                                                    .text.isEmpty
+                                                                ? "0"
+                                                                : _fromAmountController
+                                                                    .text),
+                                                        fromCurrency,
+                                                        latestCurrency
+                                                                .currencyList[
+                                                            index])),
+                                              ],
+                                            );
+                                          },
+                                          separatorBuilder:
+                                              (BuildContext context, int index) {
+                                            return Divider(
+                                              color: Colors.white38,
+                                              height: Dimension.dimen10 / 4,
+                                              endIndent: Dimension.dimen10,
+                                              indent: Dimension.dimen10,
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            );
+                    } else {
+                      return const CircularProgressIndicator();
+                    }
+                  })),
 
-            // input
-            _showNumberInput()
-          ],
+              // input
+              _showNumberInput()
+            ],
+          ),
         ));
   }
 
