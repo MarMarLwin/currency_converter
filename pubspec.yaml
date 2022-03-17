@@ -34,6 +34,8 @@ dependencies:
   floor: ^1.1.0
   intl: ^0.17.0
   connectivity_plus: ^2.2.1
+  rabbit_converter: ^2.0.0
+  flutter_mdetect: ^0.0.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -1,6 +1,7 @@
 import 'package:currency/controllers/currency_controller.dart';
 import 'package:currency/models/CurrencyRate.dart';
 import 'package:currency/util/app_constants.dart';
+import 'package:currency/util/apptheme.dart';
 import 'package:currency/util/colors.dart';
 import 'package:currency/util/dimensions.dart';
 import 'package:currency/widgets/currency_text_widget.dart';
@@ -41,8 +42,8 @@ class _CurrencyConversionState extends State<CurrencyConversion> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            AppConstants.appName,
+          title:  Text(
+           'Currency conversion',
             style: TextStyle(),
           ),
         ),

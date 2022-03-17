@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     //print("current height ${Dimension.screenHeight}");
     Get.find<CurrencyController>().getCurrencyLatestList();
     return GetMaterialApp(
-        title: 'Currency Conversion',
+        title: 'Currency Converter',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           fontFamily: 'pyidaungsu',
