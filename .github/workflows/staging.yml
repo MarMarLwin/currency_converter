@@ -1,0 +1,65 @@
+name: staging
+
+on:
+  push:
+    branches: ['master']
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build:
+    name: Build and publish
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+
+      - name: Install, test and build
+        uses: subosito/flutter-action@v2
+        with:
+          # or: 'beta', 'dev' or 'master'
+          channel: 'stable'
+          # Integration with actions/cache
+          cache: true
+          # Optional, change this to force refresh cache
+          cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
+          # optional, change this to specify the cache path
+          cache-path: '${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:'
+          # optional, x64 or arm64
+          architecture: x64
+
+      - name: Get Flutter version
+        run: flutter --version
+
+      - name: Install packages
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+        continue-on-error: true
+
+      - name: Test
+        run: flutter test
+
+      - name: Build Android APK
+        run: flutter build apk
+
+      - name: Bundle
+        run: flutter build appbundle
+
+      # - name: Build iOS app
+      # run: flutter build ios --release --no-codesign
+
+      - name: Publish to GitHub packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: releases-artifact
+          path: |
+            build/app/outputs/apk/release/app-release.apk
+            build/app/outputs/ipa/release/app-release.ipa
